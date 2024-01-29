@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vivek music</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/res.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <section class="left">
+            <div class="library">
+                <div class="lheader">
+                    <div id="backnav">
+                        <img src="svg/back.svg" alt="">
+                    </div>
+                    <div class="plname">
+
+                        <h1>Songs in Playlist</h1>
+                        <h1 id="playlistName"></h1>
+                    </div>
+                    <div class="search ">
+
+                        <div class="searchsvg">
+                            <img src="svg/search.svg" alt="search" width="100">
+                        </div>
+                        <input type="text" name="searchbox" id="searchbox">
+                        <button class="clear">clear</button>
+                    </div>
+                </div>
+
+                <div class="songs">
+                    <h1>select a playlist</h1>
+                    <!-- <div class="card">
+                        <div class="music">
+                            <img src="svg/music.svg" alt="" width="100">
+                        </div>
+                        <div class="info">
+                            <div class="name">
+                                kalastaar
+                            </div>
+                            <div class="artist">
+                                yoyo honeyshing
+                            </div>
+                        </div>
+                        <div class="ply">
+                            <img src="svg/play.svg" alt="">
+                        </div>
+                    </div> -->
+
+
+
+                </div>
+
+            </div>
+        </section>
+        <section class="right">
+            <nav class="header flex-center">
+                <h1>Vivek-music</h1>
+                <h1>Playlists</h1>
+            </nav>
+            <div class="playlists">
+                <!-- <div class="card">
+                    <div class="cover">
+                        <img src="images/co.jpg" alt="cover image" width="100px">
+                    </div>
+                    <div class="info">
+                        <h2>heading</h2>
+                        <p>description</p>
+                    </div>
+                </div>
+
+            -->
+
+
+            </div>
+
+        </section>
+        <div class="player">
+            <div class="music-info">
+                <div class="song">
+                    <h1></h1>
+                </div>
+                <div class="artist"></div>
+            </div>
+            <div class="play-controls">
+                <div class="buttons">
+
+                    <div class="prev">
+                        <img src="svg/prev.svg" alt="previous" width="20" id="prevbtn" draggable="false">
+                    </div>
+                    <div class="play">
+                        <img src="svg/play.svg" alt="previous" width="20" id="playbtn" draggable="false">
+                    </div>
+                    <div class="next">
+                        <img src="svg/next.svg" width="20" id="nextbtn" draggable="false">
+                    </div>
+                </div>
+                <div class="seekbar">
+                    <span class="time" id="currtime">00:00</span>
+                    <input type="range" name="seekbar" id="seekbar" value="0" step="0.1">
+                    <span class="time" id="duration">00:00</span>
+                </div>
+            </div>
+            <div class="volume">
+                <div class="volimg">
+                    <img src="svg/volume.svg" alt="" width="20">
+                </div>
+                <div>
+                    <input type="range" name="volume" id="volume" value="100">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>

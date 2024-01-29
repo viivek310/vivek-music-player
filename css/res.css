@@ -1,0 +1,145 @@
+@media screen and (max-width: 1400px) {
+    .container {
+        grid-template-columns: 100% 100%;
+        grid-template-rows: unset;
+        padding: 0;
+
+    }
+
+
+    .left {
+        display: none;
+    }
+
+
+    .library .songs {
+        padding: 20px 50px;
+        padding-bottom: 25svh;
+    }
+
+    .card .name,
+    .card .artist {
+        max-width: 60vw;
+    }
+
+    #backnav {
+        display: unset;
+    }
+
+    .right {
+        display: unset;
+    }
+
+    .right .playlists {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        padding: var(--padding);
+        justify-content: center;
+        height: 90svh;
+        padding-bottom: 20svh;
+    }
+
+    .player {
+        position: fixed;
+        bottom: 20px;
+        width: 90vw;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 15svh;
+       
+    }
+
+
+    .seekbar {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 0;
+        width: 100%;
+    }
+
+
+    .seekbar input {
+        width: 65vw;
+    }
+
+    .library .songs .card .music,
+    .library .songs .card .ply,
+    .play-controls .buttons>div,
+    .player .volume .volimg {
+        width: 4vw;
+    }
+
+    .music-info {
+        width: 50vw;
+    }
+}
+
+
+@media screen and (max-width: 1000px) {
+
+    .search input {
+        width: 50vw;
+    }
+
+    .library .songs .card .music,
+    .library .songs .card .ply,
+    .play-controls .buttons>div,
+    .player .volume .volimg {
+        width: 6vw;
+    }
+    .player>div:nth-child(2),
+    .player>div {
+        flex-basis: unset;
+    }
+
+
+}
+
+@media screen and (max-width: 600px) {
+    :root{
+        --primary-txt-size: 18px;
+    }
+
+    .library .songs .card .music,
+    .library .songs .card .ply,
+    .play-controls .buttons>div,
+    .player .volume .volimg {
+        width: 35px;
+    }
+
+    .volume {
+        flex-direction: column-reverse;
+        position: absolute;
+        right: -46px;
+        bottom: 15svh;
+        gap: 38px;
+    }
+
+    .volume input {
+        width: 100px;
+        transform: rotate(270deg);
+    }
+
+    .player>div:nth-child(2),
+    .player>div {
+        flex-basis: unset;
+    }
+
+    .play-controls .buttons {
+        gap: 5px;
+    }
+
+    .music-info {
+        width: 62vw;
+    }
+
+    .card .name,
+    .card .artist {
+        max-width: 47vw;
+    }
+
+    .library .songs {
+        padding: 20px;
+        padding-bottom: 25vh;
+    }
+}
