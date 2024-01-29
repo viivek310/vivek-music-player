@@ -17,7 +17,7 @@ let vol = document.querySelector("#volume");
 
 
 async function getsongs(folder) {
-    let ftch = await fetch(`vivek-music-player/songs/${folder}`);
+    let ftch = await fetch(`songs/${folder}`);
 
     let response = await ftch.text();
     let div = document.createElement('div');
@@ -65,7 +65,7 @@ async function getsongs(folder) {
 }
 
 async function getFolder() {
-    let ftch = await fetch("vivek-music-player/songs/");
+    let ftch = await fetch("songs/");
 
     let response = await ftch.text();
     // console.log(response);
