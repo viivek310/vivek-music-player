@@ -17,6 +17,7 @@ let vol = document.querySelector("#volume");
 
 
 async function getsongs(folder) {
+
     let ftch = await fetch(`https://github.com/viivek310/vivek-music-player/tree/master/songs/${folder}`);
 
     let response = await ftch.text();
@@ -65,7 +66,11 @@ async function getsongs(folder) {
 }
 
 async function getFolder() {
+
     let ftch = await fetch("https://github.com/viivek310/vivek-music-player/tree/master/songs/");
+
+    // let ftch = await fetch("/tree/master/songs/");
+
 
     let response = await ftch.text();
     // console.log(response);
