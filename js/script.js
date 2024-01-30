@@ -17,8 +17,23 @@ let vol = document.querySelector("#volume");
 
 
 async function getsongs(folder) {
+    let headers = new Headers();
 
-    let ftch = await fetch(`https://github.com/viivek310/vivek-music-player/tree/master/songs/${folder}`);
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', 'application/json');
+    headers.append('Authorization', 'Basic ' + base64.encode(username + ":" +  password));
+    headers.append('Origin','http://localhost:3000');
+
+   
+    let ftch =  fetch(`https://github.com/viivek310/vivek-music-player/tree/master/songs/${folder}`, {
+        mode: 'cors',
+        credentials: 'include',
+        method: 'POST',
+        headers: headers
+    })
+    .then(response => response.json())
+    .then(json => console.log(json))
+    .catch(error => console.log('Authorization failed: ' + error.message));
 
     let response = await ftch.text();
     let div = document.createElement('div');
