@@ -26,7 +26,7 @@ async function getsongs(folder) {
 
    
     let ftch =  fetch(`https://github.com/viivek310/vivek-music-player/tree/master/songs/${folder}`, {
-        mode: 'cors',
+        mode: 'no-cors',
         credentials: 'include',
         method: 'POST',
         headers: headers
