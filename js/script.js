@@ -17,7 +17,7 @@ let vol = document.querySelector("#volume");
 
 
 async function getsongs(folder) {
-    let ftch = await fetch(`/songs/${folder}`);
+    let ftch = await fetch(`https://github.com/viivek310/vivek-music-player/tree/master/songs/${folder}`);
 
     let response = await ftch.text();
     let div = document.createElement('div');
@@ -65,7 +65,7 @@ async function getsongs(folder) {
 }
 
 async function getFolder() {
-    let ftch = await fetch("/songs/");
+    let ftch = await fetch("https://github.com/viivek310/vivek-music-player/tree/master/songs/");
 
     let response = await ftch.text();
     // console.log(response);
@@ -189,7 +189,7 @@ async function main() {
         removeCardStyle();
         song.pause();
         song.currentTime = 0;
-        song.src = `songs/${currentfolder}/` + track;
+        song.src = `https://github.com/viivek310/vivek-music-player/tree/master/songs/${currentfolder}/` + track;
         song.load();
         var p = song.play();
         if (p !== undefined) p.catch(function () { });
