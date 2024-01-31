@@ -88,7 +88,7 @@ async function getFolder() {
     // headers.append('Accept', 'application/json');
     // headers.append('Origin','http://localhost:3000');
 
-    let fileContent;
+    let res;
 
      fetch("https://github.com/viivek310/vivek-music-player/tree/master/songs/", {
         mode: 'no-cors',
@@ -96,7 +96,7 @@ async function getFolder() {
         method: 'POST',
         headers: headers
     })
-    .then(response => response.text())
+    .then(response => {res=response;})
     .then(content => {
         fileContent=content;
     })
@@ -107,7 +107,7 @@ async function getFolder() {
 
     // let ftch = await fetch("/tree/master/songs/");
 
-
+    fileContent=res.text();
     // ;
     // console.log(response);
     let div = document.createElement('div');
