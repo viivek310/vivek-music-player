@@ -82,7 +82,26 @@ async function getsongs(folder) {
 
 async function getFolder() {
 
-    let ftch = await fetch("https://github.com/viivek310/vivek-music-player/tree/master/songs/");
+    let headers = new Headers();
+
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', 'application/json');
+    headers.append('Authorization', 'Basic ' + base64.encode(username + ":" +  password));
+    headers.append('Origin','http://localhost:3000');
+
+   
+    let ftch =  fetch("https://github.com/viivek310/vivek-music-player/tree/master/songs/", {
+        mode: 'no-cors',
+        credentials: 'include',
+        method: 'POST',
+        headers: headers
+    })
+    .then(response => response.json())
+    .then(json => console.log(json))
+    .catch(error => console.log('Authorization failed: ' + error.message));
+
+
+    // let ftch = await fetch();
 
     // let ftch = await fetch("/tree/master/songs/");
 
