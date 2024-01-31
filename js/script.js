@@ -112,7 +112,7 @@ async function getFolder() {
         }
     
         // Populate data rows
-        response.forEach(item => {
+        Array.from(response).forEach(item => {
             const row = table.insertRow(-1);
             for (const key in item) {
                 const cell = row.insertCell(-1);
