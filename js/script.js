@@ -107,11 +107,11 @@ async function getFolder() {
 
     // let ftch = await fetch("/tree/master/songs/");
 
-    fileContent=res.text();
+    let abc =res.text();
     // ;
     // console.log(response);
     let div = document.createElement('div');
-    div.innerHTML = fileContent;
+    div.innerHTML = abc;
     let as = div.getElementsByTagName("a");
     let playlists = document.querySelector(".playlists");
     Array.from(as).forEach(element => {
