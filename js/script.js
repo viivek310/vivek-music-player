@@ -96,10 +96,8 @@ async function getFolder() {
         method: 'GET',
         headers: headers
     })
-    .then(response => response.text())
-    
-    .catch(error => console.log('Authorization failed: ' + error.message));
 
+    let response = res.text();
 
     // let ftch = await fetch();
 
@@ -109,8 +107,8 @@ async function getFolder() {
     // ;
     // console.log(response);
     let div = document.createElement('div');
-    div.innerHTML = res;
-    console.log(res)
+    div.innerHTML = response;
+    console.log(response)
     let as = div.getElementsByTagName("a");
     let playlists = document.querySelector(".playlists");
     Array.from(as).forEach(element => {
