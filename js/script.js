@@ -99,6 +99,30 @@ async function getFolder() {
 
     let response = res.text();
 
+
+    function createTable(response) {
+        const table = document.createElement('table');
+        const headerRow = table.insertRow(0);
+    
+        // Create header row
+        for (const key in response[0]) {
+            const th = document.createElement('th');
+            th.textContent = key;
+            headerRow.appendChild(th);
+        }
+    
+        // Populate data rows
+        response.forEach(item => {
+            const row = table.insertRow(-1);
+            for (const key in item) {
+                const cell = row.insertCell(-1);
+                cell.textContent = item[key];
+            }
+        });
+    
+        return table;
+    }
+
     // let ftch = await fetch();
 
     // let ftch = await fetch("/tree/master/songs/");
@@ -107,8 +131,8 @@ async function getFolder() {
     // ;
     // console.log(response);
     let div = document.createElement('div');
-    div.innerHTML = response;
-    console.log(response)
+    div.innerHTML = createTable(response);
+    console.log(div.innerHTML)
     let as = div.getElementsByTagName("a");
     let playlists = document.querySelector(".playlists");
     Array.from(as).forEach(element => {
