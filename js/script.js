@@ -88,15 +88,18 @@ async function getFolder() {
     // headers.append('Accept', 'application/json');
     // headers.append('Origin','http://localhost:3000');
 
-   
-    let response =  fetch("https://github.com/viivek310/vivek-music-player/tree/master/songs/", {
+    let fileContent;
+
+     fetch("https://github.com/viivek310/vivek-music-player/tree/master/songs/", {
         mode: 'no-cors',
         credentials: 'include',
         method: 'POST',
         headers: headers
     })
     .then(response => response.text())
-    .then(json => console.log(json))
+    .then(content => {
+        fileContent=content;
+    })
     .catch(error => console.log('Authorization failed: ' + error.message));
 
 
@@ -108,7 +111,7 @@ async function getFolder() {
     // ;
     // console.log(response);
     let div = document.createElement('div');
-    div.innerHTML = response;
+    div.innerHTML = fileContent;
     let as = div.getElementsByTagName("a");
     let playlists = document.querySelector(".playlists");
     Array.from(as).forEach(element => {
