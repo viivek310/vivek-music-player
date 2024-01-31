@@ -93,7 +93,7 @@ async function getFolder() {
     let res = fetch("https://api.github.com/repos/viivek310/vivek-music-player/contents/songs/", {
         mode: 'no-cors',
         credentials: 'include',
-        method: 'POST',
+        method: 'GET',
         headers: headers
     })
     .then(response => response.text())
