@@ -89,7 +89,7 @@ async function getFolder() {
     // headers.append('Origin','http://localhost:3000');
 
    
-    let ftch =  fetch("https://github.com/viivek310/vivek-music-player/tree/master/songs/", {
+    fetch("https://github.com/viivek310/vivek-music-player/tree/master/songs/", {
         mode: 'no-cors',
         credentials: 'include',
         method: 'POST',
