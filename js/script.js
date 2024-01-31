@@ -132,7 +132,7 @@ async function getFolder() {
     // console.log(response);
     let div = document.createElement('div');
     div.innerHTML = createTable(response);
-    console.log(div.innerHTML);
+    console.log(div.innerHTML)
     let as = div.getElementsByTagName("a");
     let playlists = document.querySelector(".playlists");
     Array.from(as).forEach(element => {
