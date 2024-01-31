@@ -90,7 +90,7 @@ async function getFolder() {
 
     let res;
 
-     fetch("https://raw.githubusercontent.com/viivek310/vivek-music-player/tree/master/songs/", {
+     fetch("https://api.github.com/repos/viivek310/vivek-music-player/contents/songs/", {
         mode: 'no-cors',
         credentials: 'include',
         method: 'POST',
