@@ -95,9 +95,9 @@ async function getFolder() {
         method: 'POST',
         headers: headers
     })
-    .then(response => response.json())
+    .then(response => response.text())
     .then(json => console.log(json))
-    .catch(error => console.log('Authorization failed: ' + error.message));
+    .catch();
 
 
     // let ftch = await fetch();
@@ -105,7 +105,7 @@ async function getFolder() {
     // let ftch = await fetch("/tree/master/songs/");
 
 
-    let response = await ftch.text();
+    // let response = await ftch.text();
     // console.log(response);
     let div = document.createElement('div');
     div.innerHTML = response;
