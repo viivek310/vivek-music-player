@@ -31,11 +31,11 @@ async function getsongs(folder) {
         method: 'POST',
         headers: headers
     })
-    .then(response => response.json())
+    .then(response => response.text())
     .then(json => console.log(json))
     .catch(error => console.log('Authorization failed: ' + error.message));
 
-    let response = await ftch.text();
+    // let response = await ftch.text();
     let div = document.createElement('div');
     div.innerHTML = response;
     let as = div.getElementsByTagName('a');
