@@ -19,10 +19,10 @@ let vol = document.querySelector("#volume");
 async function getsongs(folder) {
     let headers = new Headers();
 
-    headers.append('Content-Type', 'application/json');
-    headers.append('Accept', 'application/json');
-    headers.append('Authorization', 'Basic ' + base64.encode(username + ":" +  password));
-    headers.append('Origin','http://localhost:3000');
+    // headers.append('Content-Type', 'application/json');
+    // headers.append('Accept', 'application/json');
+    // headers.append('Authorization', 'Basic ' + base64.encode(username + ":" +  password));
+    // headers.append('Origin','http://localhost:3000');
 
    
     let ftch =  fetch(`https://github.com/viivek310/vivek-music-player/tree/master/songs/${folder}`, {
