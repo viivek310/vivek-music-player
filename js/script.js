@@ -1,4 +1,6 @@
 
+
+
 let song = new Audio();
 let currentfolder;
 let songslist = [];
@@ -17,150 +19,136 @@ let vol = document.querySelector("#volume");
 
 
 async function getsongs(folder) {
-    let headers = new Headers();
-
-    // headers.append('Content-Type', 'application/json');
-    // headers.append('Accept', 'application/json');
-    // headers.append('Authorization', 'Basic ' + base64.encode(username + ":" +  password));
-    // headers.append('Origin','http://localhost:3000');
-
-   
-    let response =  fetch(`https://github.com/viivek310/vivek-music-player/tree/master/songs/${folder}`, {
-        mode: 'no-cors',
-        credentials: 'include',
-        method: 'POST',
-        headers: headers
-    })
-    .then(response => response.text())
-    .then(json => console.log(json))
-    .catch(error => console.log('Authorization failed: ' + error.message));
-
-    // let response = await ftch.text();
-    let div = document.createElement('div');
-    div.innerHTML = response;
-    let as = div.getElementsByTagName('a');
-    let array = Array.from(as);
-    let songs = []
-    array.forEach(element => {
-        if (element.href.endsWith(".mp3"))
-            songs.push(element.href.split(`/${folder.replaceAll(" ","%20")}/`)[1]);
-            // console.log(folder)
-    });
 
 
-    // display songs in playlist
+    try {
+        var { request } = await import("https://cdn.pika.dev/@octokit/request");
 
-    let songdiv = document.querySelector(".songs");
-    // console.log(songdiv.innerHTML);
-    songdiv.innerHTML = "";
 
-    for (let index = 0; index < songs.length; index++) {
-        const element = songs[index];
-        let name = songs[index].replaceAll("%20"," ").split("_")[0];
-        let artist = songs[index].replaceAll("%20"," ").split("_")[1];
+        const result = await request(`GET /repos/viivek310/vivek-music-player/contents/songs/${folder.replaceAll("%20"," ")}`);
+        var songs = []
+        Array.from(result.data).forEach(element => {
 
-        songdiv.innerHTML = songdiv.innerHTML + `<div class="card">
-            <div class="music">
-                <img src="svg/music.svg" alt="" width="100">
-            </div>
-            <div class="info">
-                <div class="name">
-                    ${name}
-                </div>
-                <div class="artist">
-                    ${artist}
-                </div>
-            </div>
-            <div class="ply">
-                <img src="svg/play.svg" alt="">
-            </div>
-        </div>`;
-        // console.log(songs[index])
+            if (element.name.endsWith(".mp3"))
+                songs.push(element.name);
+        });
+        let songdiv = document.querySelector(".songs");
+        songdiv.innerHTML = "";
+
+        for (let index = 0; index < songs.length; index++) {
+            const element = songs[index];
+            let name = songs[index].split("_")[0];
+            let artist = songs[index].split("_")[1];
+
+            songdiv.innerHTML = songdiv.innerHTML + `<div class="card">
+                    <div class="music">
+                        <img src="svg/music.svg" alt="" width="100">
+                    </div>
+                    <div class="info">
+                        <div class="name">
+                            ${name}
+                        </div>
+                        <div class="artist">
+                            ${artist}
+                        </div>
+                    </div>
+                    <div class="ply">
+                        <img src="svg/play.svg" alt="">
+                    </div>
+                </div>`;
+        }
+        songarray = Array.from(songs)
+        return songs;
+
+
+    } catch (error) {
+        console.error('Error:', error);
     }
-    return songs;
 }
 
 async function getFolder() {
 
-    let headers = new Headers();
+ 
 
-    // headers.append('Content-Type', 'application/json');
-    // headers.append('Accept', 'application/json');
-    // headers.append('Origin','http://localhost:3000');
+    (async () => {
+        try {
+            var { request } = await import("https://cdn.pika.dev/@octokit/request");
 
-    
-
-    let res = await fetch("https://api.github.com/repos/viivek310/vivek-music-player/contents/songs/", {
-        mode: 'no-cors',
-        credentials: 'include',
-        method: 'GET',
-        headers: headers
-    })
-
-    let response = res.text();
+            const result = await request("GET /repos/viivek310/vivek-music-player/contents/songs");
+            let playlists = document.querySelector(".playlists");
+            Array.from(result.data).forEach(element => {
 
 
-    function createTable(response) {
-        const table = document.createElement('table');
-        const headerRow = table.insertRow(0);
-    
-        // Create header row
-        for (const key in response[0]) {
-            const th = document.createElement('th');
-            th.textContent = key;
-            headerRow.appendChild(th);
+
+                let fname = element.name;
+                playlists.innerHTML = playlists.innerHTML + `<div class="card">
+                  <div class="cover">
+                      <img src="https://github.com/viivek310/vivek-music-player/blob/master/songs/${fname}/cover.jpg?raw=true" alt="cover image" width="100px" height="100px">
+                  </div>
+                  <div class="info">
+                      <h2>${fname.replaceAll("%20", " ")}</h2>
+                  </div>
+              </div>`
+
+            });
+        } catch (error) {
+            console.error('Error:', error);
         }
-    
-        // Populate data rows
-        Array.from(response).forEach(item => {
-            const row = table.insertRow(-1);
-            for (const key in item) {
-                const cell = row.insertCell(-1);
-                cell.textContent = item[key];
-            }
-        });
-    
-        return table;
-    }
 
-    // let ftch = await fetch();
 
-    // let ftch = await fetch("/tree/master/songs/");
-
-    // let abc =res.text();
-    // ;
-    // console.log(response);
-    let div = document.createElement('div');
-    div.innerHTML = createTable(response);
-    console.log(div.innerHTML)
-    let as = div.getElementsByTagName("a");
-    let playlists = document.querySelector(".playlists");
-    Array.from(as).forEach(element => {
-        if (element.href.includes("/songs/")) {
-            // console.log(element.href);
-
-            let fname = element.href.split("/")[4];
-            playlists.innerHTML = playlists.innerHTML + `<div class="card">
-            <div class="cover">
-                <img src="songs/${fname}/cover.jpg" alt="cover image" width="100px" height="100px">
-            </div>
-            <div class="info">
-                <h2>${fname.replaceAll("%20"," ")}</h2>
-            </div>
-        </div>`
+        let childs = document.querySelectorAll(".playlists .card");
+        if (childs.length < 7) {
+            r.style.setProperty('--cols', childs.length);
+        } else {
+            r.style.setProperty('--cols', "auto-fit");
         }
-    });
 
 
 
-    let childs = document.querySelectorAll(".playlists .card");
-    if (childs.length < 7) {
-        r.style.setProperty('--cols', childs.length);
-    } else {
-        r.style.setProperty('--cols', "auto-fit");
-    }
+
+        let playlists = document.querySelectorAll(".playlists .card");
+        Array.from(playlists).forEach((element) => {
+
+            element.addEventListener("click", async () => {
+                let fname = element.querySelector(".info h2");
+                currentfolder = fname.innerHTML;
+                songslist = await getsongs(fname.innerHTML);
+              
+                // console.log(fname.innerHTML)
 
 
+                let playlistsong = document.querySelectorAll(".songs .card");
+
+                let li = Array.from(playlistsong);
+
+                Array.from(playlistsong).forEach(element => {
+                    element.addEventListener("click", () => {
+            
+                        playsong(songslist[li.indexOf(element)]);
+                    })
+                });
+
+                // console.log(list)
+                let ind = songslist.indexOf(decodeURIComponent(song.currentSrc.split(`/${currentfolder.replaceAll(" ", "%20")}/`)[1]));
+                // console.log(indson)
+                let cards = document.querySelectorAll(".songs .card");
+                if (typeof (cards[ind]) != "undefined") {
+                    cards[ind].classList.add("songCardBackground");
+                    cards[ind].querySelector(".ply").querySelector("img").src = "svg/pause.svg"
+                }
+
+                let plistName = document.querySelector("#playlistName");
+                plistName.innerHTML = currentfolder;
+
+                searchbox.disabled = false;
+                searchbox.defaultValue = "";
+
+
+                document.querySelector(".left").style.display = "unset";
+            })
+
+        })
+    })();
 
 }
 
@@ -184,78 +172,43 @@ function convert(seconds) {
 }
 
 
+
+
+
+
+function removeCardStyle() {
+    let ind = songslist.indexOf(decodeURIComponent(song.currentSrc.split(`/${currentfolder.replaceAll(" ", "%20")}/`)[1]));
+    let cards = document.querySelectorAll(".songs .card");
+    if (typeof (cards[ind]) != "undefined") {
+        cards[ind].classList.remove("songCardBackground");
+        cards[ind].querySelector(".ply").querySelector("img").src = "svg/play.svg";
+    }
+}
+
+function playsong(track) {
+
+    removeCardStyle();
+    song.pause();
+    song.currentTime = 0;
+    // track = track.replaceAll("%20"," ");
+    console.log("this is track", track)
+    song.src = `https://raw.githubusercontent.com/viivek310/vivek-music-player/master/songs/${currentfolder}/` + track;
+    song.load();
+    var p = song.play();
+    if (p !== undefined) p.catch(function () { });
+}
+
+
+
+
+
+
+
+
 async function main() {
     let list = [];
     let evnot = true;
     await getFolder();
-
-
-
-
-
-
-
-    let playlists = document.querySelectorAll(".playlists .card");
-    Array.from(playlists).forEach(async (element) => {
-
-        element.addEventListener("click", async () => {
-            let fname = element.querySelector(".info h2");
-            currentfolder = fname.innerHTML;
-            list = await getsongs(fname.innerHTML);
-            songslist = list;
-
-            // console.log(fname.innerHTML)
-
-
-            let playlistsong = document.querySelectorAll(".songs .card");
-            let li = Array.from(playlistsong);
-
-            Array.from(playlistsong).forEach(element => {
-                element.addEventListener("click", () => {
-                    playsong(list[li.indexOf(element)]);
-                })
-            });
-
-
-            let ind = songslist.indexOf(song.currentSrc.split(`/${currentfolder}/`)[1]);
-            let cards = document.querySelectorAll(".songs .card");
-            if (typeof (cards[ind]) != "undefined" && evnot == true) {
-                cards[ind].classList.add("songCardBackground");
-                cards[ind].querySelector(".ply").querySelector("img").src = "svg/pause.svg"
-            }
-
-            let plistName = document.querySelector("#playlistName");
-            plistName.innerHTML = currentfolder;
-
-            searchbox.disabled = false;
-            searchbox.defaultValue = "";
-
-
-            document.querySelector(".left").style.display = "unset";
-        })
-
-    })
-
-
-    function removeCardStyle() {
-        let ind = list.indexOf(song.currentSrc.split(`/${currentfolder.replaceAll(" ","%20")}/`)[1]);
-        let cards = document.querySelectorAll(".songs .card");
-        if (typeof (cards[ind]) != "undefined") {
-            cards[ind].classList.remove("songCardBackground");
-            cards[ind].querySelector(".ply").querySelector("img").src = "svg/play.svg";
-        }
-    }
-
-    function playsong(track) {
-
-        removeCardStyle();
-        song.pause();
-        song.currentTime = 0;
-        song.src = `https://github.com/viivek310/vivek-music-player/tree/master/songs/${currentfolder}/` + track;
-        song.load();
-        var p = song.play();
-        if (p !== undefined) p.catch(function () { });
-    }
 
 
 
@@ -282,10 +235,8 @@ async function main() {
         currtime.innerHTML = convert(song.currentTime);
     });
 
-
-    song.addEventListener("playing", () => {
+    song.addEventListener("playing", async () => {
         dur.innerHTML = convert(song.duration);
-        
         let name = song.currentSrc.split(`/${currentfolder.replaceAll(" ", "%20")}/`)[1].replaceAll("%20", " ").split("_")[0];
         let artist = song.currentSrc.split(`/${currentfolder.replaceAll(" ", "%20")}/`)[1].replaceAll("%20", " ").split("_")[1]
 
@@ -297,9 +248,7 @@ async function main() {
         playbtn.src = "svg/pause.svg";
         seek.max = parseFloat(song.duration);
 
-
-
-        let ind = list.indexOf(song.currentSrc.split(`/${currentfolder.replaceAll(" ", "%20")}/`)[1]);
+        let ind = songslist.indexOf(decodeURIComponent(song.currentSrc.split(`/${currentfolder.replaceAll(" ", "%20")}/`)[1]));
         let cards = document.querySelectorAll(".songs .card");
         if (typeof (cards[ind]) != "undefined") {
             cards[ind].classList.add("songCardBackground");
@@ -319,11 +268,14 @@ async function main() {
         sname.classList.remove("animate");
         playbtn.src = "svg/play.svg";
 
-        let ind = list.indexOf(song.currentSrc.split(`/${currentfolder.replaceAll(" ", "%20")}/`)[1]);
-        // console.log()
+        // let templist = await getsongs(currentfolder);
+        let ind = songslist.indexOf(decodeURIComponent(song.currentSrc.split(`/${currentfolder.replaceAll(" ", "%20")}/`)[1]));
+ 
         let cards = document.querySelectorAll(".songs .card");
-        cards[ind].querySelector(".ply").querySelector("img").src = "svg/play.svg";
-        // console.log(cards[ind]);
+    
+            cards[ind].querySelector(".ply").querySelector("img").src = "svg/play.svg";
+    
+      
     })
 
     song.addEventListener("ended", () => {
@@ -353,29 +305,30 @@ async function main() {
     });
 
     nextbtn.addEventListener("click", () => {
-        let ind = list.indexOf(song.currentSrc.split(`/${currentfolder.replaceAll(" ","%20")}/`)[1]);
-        let next = (ind + 1) % list.length;
-        playsong(list[next]);
+        let ind = songslist.indexOf(decodeURIComponent(song.currentSrc.split(`/${currentfolder.replaceAll(" ", "%20")}/`)[1]));
+        let next =(ind + 1) % songslist.length;
+        
+        playsong(songslist[next]);
     })
 
     prevbtn.addEventListener("click", () => {
-        let ind = list.indexOf(song.currentSrc.split(`/${currentfolder.replaceAll(" ","%20")}/`)[1]);
+        let ind = songslist.indexOf(decodeURIComponent(song.currentSrc.split(`/${currentfolder.replaceAll(" ", "%20")}/`)[1]));
         let prev;
         if (ind == 0) {
-            prev = list.length - 1;
+            prev = songslist.length - 1;
         } else {
             prev = ind - 1;
         }
-        playsong(list[prev]);
+        playsong(songslist[prev]);
     })
 
     let songdiv = document.querySelector(".songs");
 
 
-    searchbox.addEventListener("input", ()=> {
+    searchbox.addEventListener("input", () => {
         if (typeof currentfolder != "undefined") {
             let val = searchbox.value.toLowerCase();
-            let cardsSearch = list.filter(ele => ele.toLowerCase().includes(val));
+            let cardsSearch = songslist.filter(ele => ele.toLowerCase().includes(val));
             // console.log(card)
             songdiv.innerHTML = " ";
 
@@ -434,11 +387,11 @@ async function main() {
 
 
 
-    window.addEventListener('resize', ()=>{
-        if(window.innerWidth>1400){
-            document.querySelector(".left").style.display="flex";
-        }else{
-            document.querySelector(".left").style.display="none"
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 1400) {
+            document.querySelector(".left").style.display = "flex";
+        } else {
+            document.querySelector(".left").style.display = "none"
         }
     });
 }
