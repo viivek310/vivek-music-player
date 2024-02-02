@@ -355,9 +355,9 @@ async function main() {
                     </div>
                 </div>`;
 
-                // document.querySelector(".songs").addEventListener("click", () => {
-                //     playsong(ele);
-                // })
+                document.querySelector(".songs").addEventListener("click", () => {
+                    playsong(ele);
+                })
 
             })
             if (songdiv.childElementCount == 0) {
