@@ -383,13 +383,13 @@ async function main() {
 
 
 
-    window.addEventListener('resize', () => {
-        if (window.innerWidth > 1400) {
-            document.querySelector(".left").style.display = "flex";
-        } else {
-            document.querySelector(".left").style.display = "none"
-        }
-    });
+    // window.addEventListener('resize', () => {
+    //     if (window.innerWidth > 1400) {
+    //         document.querySelector(".left").style.display = "flex";
+    //     } else {
+    //         document.querySelector(".left").style.display = "none"
+    //     }
+    // });
 }
 
 main();
