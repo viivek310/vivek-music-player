@@ -326,7 +326,7 @@ async function main() {
 
 
     searchbox.addEventListener("input", () => {
-        if (typeof currentfolder != "undefined") {
+       
             let val = searchbox.value.toLowerCase();
             let cardsSearch = songslist.filter(ele => ele.toLowerCase().includes(val));
             // console.log(card)
@@ -363,11 +363,7 @@ async function main() {
             if (songdiv.childElementCount == 0) {
                 songdiv.innerHTML = "No match found";
             }
-        } else {
-            searchbox.disabled = true;
-            searchbox.value = "";
-            searchbox.defaultValue = "select a playlist"
-        }
+      
 
     })
 
