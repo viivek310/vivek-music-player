@@ -357,7 +357,7 @@ async function main() {
 
                 document.querySelector(".songs").addEventListener("click", () => {
                     playsong(ele);
-                    searchbox.value=" ";
+                    // searchbox.value=" ";
                 })
 
             })
