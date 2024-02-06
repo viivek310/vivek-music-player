@@ -191,7 +191,7 @@ function playsong(track) {
     song.pause();
     song.currentTime = 0;
     // track = track.replaceAll("%20"," ");
-    console.log("this is track", track)
+  
     song.src = `https://raw.githubusercontent.com/viivek310/vivek-music-player/master/songs/${currentfolder}/` + track;
     song.load();
     var p = song.play();
@@ -357,6 +357,7 @@ async function main() {
 
                 document.querySelector(".songs").addEventListener("click", () => {
                     playsong(ele);
+                    searchbox.input=" ";
                 })
 
             })
@@ -367,11 +368,7 @@ async function main() {
 
     })
 
-    document.querySelector(".clear").addEventListener("click", () => {
-        searchbox.value = "";
-        searchbox.dispatchEvent(new Event('input'));
-    })
-
+ 
     vol.addEventListener("input", () => {
         song.volume = vol.value / 100;
     })

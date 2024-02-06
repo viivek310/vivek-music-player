@@ -97,7 +97,7 @@
 
 @media screen and (max-width: 600px) {
     :root{
-        --primary-txt-size: 18px;
+        --primary-txt-size: 15px;
     }
 
     .library .songs .card .music,
@@ -118,6 +118,12 @@
     .volume input {
         width: 100px;
         transform: rotate(270deg);
+    }
+
+    .player {
+        bottom: 24px;
+        height: 10svh;
+        width: 93vw;
     }
 
     .player>div:nth-child(2),
