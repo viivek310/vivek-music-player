@@ -488,8 +488,10 @@ body {
 }
 
 
-input[type="range"]{
-    border
+input[type="range"]::-webkit-slider-thumb{
+    background: transparent;
+    border: none;
+    outline: none;
 }
 
 
