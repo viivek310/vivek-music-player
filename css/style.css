@@ -488,11 +488,11 @@ body {
 }
 
 
-/* input[type="range"]::-webkit-slider-thumb{
-    background: transparent;
+input[type="range"]::-webkit-slider-thumb{
+    background: black;
     border: none;
     outline: none;
-} */
+}
 
 
 
