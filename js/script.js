@@ -39,8 +39,8 @@ async function getsongs(folder) {
             const element = songs[index];
             let name = songs[index].split("_")[0];
             let artist = songs[index].split("_")[1];
-
-            songdiv.innerHTML = songdiv.innerHTML + `<div class="card">
+            
+                let html=  `<div class="card">
                     <div class="music">
                         <img src="svg/music.svg" alt="" width="100">
                     </div>
@@ -56,6 +56,8 @@ async function getsongs(folder) {
                         <img src="svg/play.svg" alt="">
                     </div>
                 </div>`;
+
+                songdiv.insertAdjacentHTML("beforeend",html);
         }
         songarray = Array.from(songs)
         return songs;
@@ -81,7 +83,7 @@ async function getFolder() {
 
 
                 let fname = element.name;
-                playlists.innerHTML = playlists.innerHTML + `<div class="card">
+                let html =  `<div class="card">
                   <div class="cover">
                       <img src="https://github.com/viivek310/vivek-music-player/blob/master/songs/${fname}/cover.jpg?raw=true" alt="cover image" width="100px" height="100px">
                   </div>
@@ -89,6 +91,7 @@ async function getFolder() {
                       <h2>${fname.replaceAll("%20", " ")}</h2>
                   </div>
               </div>`
+              playlists.insertAdjacentHTML("beforeend",html)
 
             });
         } catch (error) {
@@ -355,10 +358,10 @@ async function main() {
                     </div>
                 </div>`;
 
-                document.querySelector(".songs").addEventListener("click", () => {
-                    playsong(ele);
-                    // searchbox.value=" ";
-                })
+                // document.querySelector(".songs").addEventListener("click", () => {
+                //     playsong(ele);
+                //     // searchbox.value=" ";
+                // })
 
             })
             if (songdiv.childElementCount == 0) {
