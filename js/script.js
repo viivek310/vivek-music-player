@@ -246,17 +246,17 @@ async function main() {
         sname.innerHTML = name;
         sartist.innerHTML = artist;
         sname.classList.add("animate");
-        r.style.setProperty('--blue', sname.offsetWidth);
+        // r.style.setProperty('--blue', sname.offsetWidth);
 
         playbtn.src = "svg/pause.svg";
         seek.max = parseFloat(song.duration);
 
         let ind = songslist.indexOf(decodeURIComponent(song.currentSrc.split(`/${currentfolder.replaceAll(" ", "%20")}/`)[1]));
         let cards = document.querySelectorAll(".songs .card");
-        if (typeof (cards[ind]) != "undefined") {
+        // if (typeof (cards[ind]) != "undefined") {
             cards[ind].classList.add("songCardBackground");
             cards[ind].querySelector(".ply").querySelector("img").src = "svg/pause.svg"
-        }
+        // }
 
         let player = document.querySelector(".player");
         player.style.display = "flex";

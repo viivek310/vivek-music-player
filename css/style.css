@@ -378,6 +378,7 @@ body {
     /* background: linear-gradient(var(--playercolor1) ,var(--playercolor2)); */
     /* background: linear-gradient(0.98turn, red,1%, #493434,89%,red ); */
     background: var(--boxcolor4);
+    
     border-radius: 10px;
     grid-column: 1/3;
     display: flex;
